@@ -1,10 +1,11 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import {ApiDelete} from "../../common/Api";
 
 const DepartmentTable = (props) => {
-    // const deletee = (id) => {
-    //     ApiDelete("/api/movies/" + id).then((data) => props.delete());
-    // };
+    const deletee = (id) => {
+        ApiDelete("/api/movies/" + id).then((data) => props.delete());
+    };
 
     return (
         <div>
@@ -29,13 +30,13 @@ const DepartmentTable = (props) => {
                         <td>
                             <div className="btn-group">
                                 <Link
-                                    to={"/movies/show/" + item.departname_ID}
+                                    to={"/movies/show/" + item.departmentId}
                                     className="btn btn-sm btn-info"
                                 >
                                     Zobrazit
                                 </Link>
                                 <Link
-                                    to={"/movies/edit/" + item.departname_ID}
+                                    to={"/movies/edit/" + item.departmentId}
                                     className="btn btn-sm btn-warning"
                                 >
                                     Upravit
