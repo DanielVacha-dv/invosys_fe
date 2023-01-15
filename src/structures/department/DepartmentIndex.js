@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import {ApiGet} from "../../common/Api" ;
+import {apiGraph} from "../../common/ApiGraphql" ;
 import DepartmentTable from "./DepartmentTable" ;
 
 
