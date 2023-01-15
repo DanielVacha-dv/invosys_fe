@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
 import {ApiGet} from "../../common/Api" ;
-import {apiGraph} from "../../common/ApiGraphql" ;
 import DepartmentTable from "./DepartmentTable" ;
 
 
@@ -22,9 +21,9 @@ const DepartmentIndex = (props) => {
     //     ApiGet("/api/movies").then((data) => setMovies(data));
     // };
     //
-    useEffect(() => {
-        ApiGet("/department/getall","").then((data) => setDepartmentListState(data));
-    }, []);
+    // useEffect(() => {
+    //     ApiGet("/department/getall","").then((data) => setDepartmentListState(data));
+    // }, []);
 
     // const handleChange = (e) => {
     //     // pokud vybereme prázdnou hodnotu (máme definováno jako true/false/'' v komponentách), nastavíme na undefined
