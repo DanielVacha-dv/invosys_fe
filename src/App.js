@@ -56,7 +56,6 @@ export function App() {
             {/*<Route path="/people/edit/:id" component={PersonForm} />*/}
           </Switch>
         </div>
-
         <Redirect from="/" to="/department"/>
       </Router>
       </div>

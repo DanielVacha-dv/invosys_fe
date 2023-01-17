@@ -1,47 +1,34 @@
 import React, { useState, useEffect } from "react";
 import {ApiGet} from "../../common/Api" ;
 import DepartmentTable from "./DepartmentTable" ;
+import {ApolloClient, InMemoryCache, ApolloProvider, HttpLink, from} from "@apollo/client";
+import {useQuery, gql} from '@apollo/client';
+import {GET_ALL_DEPARTMENTS} from '../../Graphql/Queries';
+import {onError} from "@apollo/client/link/error";
+import {GetDepartments} from "./GetDepartments";
 
+const errorLink = onError(({graphqlErrors}) => {
+    if (graphqlErrors) {
+        graphqlErrors.map(({message, location, path}) => {
+            alert(`Graphq; error  ${message}`)
+        });
+    }
+});
+
+const link = from([
+    errorLink,
+    new HttpLink({uri: "http://localhost:8083/graphql"}),
+]);
+
+const client = new ApolloClient({
+    cache: new InMemoryCache(),
+    link: link,
+});
 
 const DepartmentIndex = (props) => {
     const [departmentListState, setDepartmentListState] = useState([]);
-    // const [actorListState, setActorList] = useState([]);
-    // const [genreListState, setGenreList] = useState([]);
-    // const [moviesState, setMovies] = useState([]);
-    // const [filterState, setFilter] = useState({
-    //     directorID: undefined,
-    //     actorID: undefined,
-    //     genre: undefined,
-    //     fromYear: undefined,
-    //     toYear: undefined,
-    //     limit: undefined,
-    // });
-    //
-    // const deletee = () => {
-    //     ApiGet("/api/movies").then((data) => setMovies(data));
-    // };
-    //
-    // useEffect(() => {
-    //     ApiGet("/department/getall","").then((data) => setDepartmentListState(data));
-    // }, []);
-
-    // const handleChange = (e) => {
-    //     // pokud vybereme prázdnou hodnotu (máme definováno jako true/false/'' v komponentách), nastavíme na undefined
-    //     if (e.target.value === "false" || e.target.value === "true" || e.target.value === '') {
-    //         setFilter(prevState => {
-    //             return {...prevState, [e.target.name]: undefined}
-    //         });
-    //     } else {
-    //         setFilter(prevState => {
-    //             return { ...prevState, [e.target.name]: e.target.value}
-    //         });
-    //     }
-    // };
     const handleSubmit = (e) => {
         e.preventDefault();
-        // const params = filterState;
-        //console.log(filterState)
-
         ApiGet("/department/getall", "").then((data) => setDepartmentListState(data));
     };
 
@@ -59,7 +46,8 @@ const DepartmentIndex = (props) => {
             {/*    confirm="Filtrovat filmy"*/}
             {/*/>*/}
             {/*<hr />*/}
-            <DepartmentTable items={departmentListState} label="Počet oddělení:" />
+            <ApolloProvider client={client}> <DepartmentTable/> </ApolloProvider>
+
         </div>
     );
 };
