@@ -12,7 +12,7 @@ export const DepartmentInput = () => {
             variables: {
                 name: ''+departmentName,
                 comment: ''+departmentComment,
-                // subDepartmentIds: new Array(1),
+                subDepartmentIds: new Array(2,3),
             }
         })
         if (error) {

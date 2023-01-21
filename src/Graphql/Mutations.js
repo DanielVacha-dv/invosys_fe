@@ -4,12 +4,12 @@ export const CREATE_DEPARTMENT_MUTATION = gql`
     mutation createDepartment2(
         $name: String!  
         $comment: String 
-#        $subDepartmentIds: [ID] 
+        $subDepartmentIds: [Int] 
     ) {
         createDepartment2(
             name: $name
             comment: $comment
-#            subDepartmentIds: $subDepartmentIds
+            subDepartmentIds: $subDepartmentIds
         )       
     }
 `
