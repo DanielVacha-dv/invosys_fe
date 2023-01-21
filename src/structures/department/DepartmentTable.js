@@ -1,6 +1,7 @@
 import React, {useEffect, useState} from "react";
 import {Link} from "react-router-dom";
 import {ApiDelete} from "../../common/Api";
+import {DepartmentInput} from "./DepartmentInput";
 // import {DepartmentGraph} from "./DepartmentGraph"
 import {useQuery, gql} from "@apollo/client";
 import {GET_ALL_DEPARTMENTS} from "../../Graphql/Queries";
@@ -30,14 +31,15 @@ const DepartmentTable = () => {
                     console.log("pico data tr name " + val.name);
                     console.log("data tr departmentId " + val.departmentId);
                     return (
-                    <tr key={val.departmentId}>
-                        <td>{val.name}</td>
-                        <td>{val.name}</td>
-                        <td>{val.departmentId}</td>
-                    </tr>)
+                        <tr key={val.departmentId}>
+                            <td>{val.name}</td>
+                            <td>{val.name}</td>
+                            <td>{val.departmentId}</td>
+                        </tr>)
                 })}
                 </tbody>
             </table>
+            <DepartmentInput/>
             <Link to={"/movies/create"} className="btn btn-success">
                 Nové oddělení
             </Link>
