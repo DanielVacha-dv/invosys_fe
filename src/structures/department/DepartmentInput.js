@@ -31,7 +31,7 @@ export const DepartmentInput = () => {
                 setDepartmentComment(e.target.value);
             }}/>
             <input
-                type="text" placeholder="subdepartment id" onChange={(e) => {
+                type="number" placeholder="subdepartment id" onChange={(e) => {
                 setSubDepartmentID(e.target.value);
             }}/>
             <button onClick={addDepartment}>Create department</button>

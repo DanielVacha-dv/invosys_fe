@@ -13,3 +13,13 @@ export const CREATE_DEPARTMENT_MUTATION = gql`
         )       
     }
 `
+
+export const DELETE_DEPARTMENT_MUTATION = gql`
+    mutation deleteDepartment(
+        $departID: Int!
+    ) {
+        deleteDepartment(
+            departID: $departID
+        )
+    }
+`
