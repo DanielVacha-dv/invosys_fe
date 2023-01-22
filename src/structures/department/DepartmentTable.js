@@ -56,15 +56,17 @@ const DepartmentTable = () => {
                                     className="btn btn-sm btn-danger"
                                 >Odstranit
                                 </button>
+                                <div className="btn-group">
+                                    <Link to={"/department/show/" + val.departmentId} className="btn btn-sm btn-info">
+                                        Zobrazit
+                                    </Link>
+                                </div>
                             </td>
                         </tr>)
                 })}
                 </tbody>
             </table>
             <DepartmentInput/>
-            {/*<Link to={"/movies/create"} className="btn btn-success">*/}
-            {/*    Nové oddělení*/}
-            {/*</Link>*/}
         </div>
     );
 };
