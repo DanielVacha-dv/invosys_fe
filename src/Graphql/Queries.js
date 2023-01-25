@@ -16,10 +16,11 @@ export const GET_ALL_DEPARTMENTS = gql`
 `
 
 export const GET_DEPARTMENT_BY_ID = gql`
-    query getDepartmentById {
+    query getDepartmentById($id: Int) {
         getDepartmentById(id: $id) {
             departmentId
             name,
+            comment,
             subDepartmentL {
                 subDepartmentId,
                 subDepartmentName,

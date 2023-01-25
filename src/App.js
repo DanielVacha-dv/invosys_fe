@@ -17,7 +17,7 @@ import './App.css';
 
 export function App() {
     return (
-        <div className="p-3 mb-2 bg-secondary text-white">
+        <div className="p-3 mb-2 bg-secondary text-white" style = {{height:"100vh"}}>
             <Router>
                 <div className="container">
                     <nav className="navbar navbar-expand-lg navbar-light bg-light">

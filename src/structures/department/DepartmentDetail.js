@@ -1,38 +1,57 @@
 import React, {useEffect, useState} from "react";
 import {useQuery, gql} from "@apollo/client";
 import {GET_DEPARTMENT_BY_ID} from "../../Graphql/Queries";
+import Select from 'react-select'
 
 const DepartmentDetail = (props) => {
     const [departmentName, setDepartmentName] = useState("");
-    const [departmentComment, setdDpartmentComment] = useState(0);
+    const [departmentComment, setDepartmentComment] = useState("");
     const [departmenId, setDepartmenId] = useState(0);
 
-    const {error, loading, data} = useQuery(GET_DEPARTMENT_BY_ID);
+    const {error, loading, data} = useQuery(GET_DEPARTMENT_BY_ID, {
+        variables: {id: props.match.params.id},
+    });
+
+    const options = [
+        { value: 'chocolate', label: 'Chocolate' },
+        { value: 'strawberry', label: 'Strawberry' },
+        { value: 'vanilla', label: 'Vanilla' }
+    ]
+
     useEffect(() => {
         if (data) {
-            setDepartmentName(data.name);
-            departmentComment(data.comment);
-            setDepartmenId(data.departmenId);
+            setDepartmentName(data.getDepartmentById.name);
+            setDepartmentComment(data.getDepartmentById.comment);
+            setDepartmenId(data.getDepartmentById.departmenId);
+            console.log("set data ==" + data)
         }
     }, [data]);
 
+    const getDepartmentByIDJS = () => {
+        console.log("getDepartmentByIDJS ==")
+        if (error) {
+            console.log(" Error catch " + error)
+        }
+    };
+    let a = getDepartmentByIDJS();
     return (
         <div>
-            <h1>Detail department</h1>
+            <h1>Department detail</h1>
             <hr/>
-            {/*<p>{genres.join(" / ")}</p>*/}
             <p>
-                <strong>Department name: </strong>
-                {departmentName}
-                {/*{directorState.name}*/}
-                {/*<br />*/}
-                {/*<strong>Hrají: </strong>*/}
-                {/*{actors.join(", ")}*/}
-                {/*<br />*/}
-                {/*<strong>Dostupný: </strong>*/}
-                {/*{availableState ? "ANO" : "NE"}*/}
-                {/*<br />*/}
-                {/*<em>Vytvořeno {dateAdded.toLocaleString()}</em>*/}
+                <input
+                    type="text" placeholder=" department name " value={departmentName} onChange={(e) => {
+                    setDepartmentName(e.target.value);
+                }}/>
+                <input
+                    type="text" placeholder="department comment" value={departmentComment} onChange={(e) => {
+                    setDepartmentComment(e.target.value);
+                }}/>
+                <Select
+                    closeMenuOnSelect={false}
+                    isMulti
+                    options={options}
+                />
             </p>
         </div>
     );
