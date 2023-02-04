@@ -46,7 +46,7 @@ const DepartmentTable = () => {
                     return (
                         <tr key={val.departmentId}>
                             <td>{val.name}</td>
-                            <td>{val.name}</td>
+                            <td>{val.comment}</td>
                             <td>
                                 <button
                                     onClick={(e) => {
@@ -57,7 +57,13 @@ const DepartmentTable = () => {
                                 >Odstranit
                                 </button>
                                 <div className="btn-group">
-                                    <Link to={"/department/show/" + val.departmentId} className="btn btn-sm btn-info">
+                                    <Link to={{
+                                        pathname: "/department/show/" + val.departmentId,
+                                        state: {
+                                            departmentName: val.name,
+                                            departmentComment: val.comment
+                                        }
+                                    }} className="btn btn-sm btn-info">
                                         Zobrazit
                                     </Link>
                                 </div>

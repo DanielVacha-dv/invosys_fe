@@ -37,14 +37,15 @@ export function App() {
                     </nav>
                     <Switch>
                         <Route exact path="/department" component={DepartmentIndex}/>
-                        <Route path="/department/show/:id" component={DepartmentDetail}/>
+                        {/*<Route path="/department/show/:id" component={DepartmentDetail}/>*/}
+                        <Route path="/department/show/:id" exact render={(props)=> <DepartmentDetail {...props}/>} />
                         {/*<Route path="/movies/create" component={MovieForm} />*/}
                         {/*<Route path="/movies/edit/:id" component={MovieForm} />*/}
 
                         {/*<Route exact path="/people" component={PersonIndex} />*/}
                         {/*<Route path="/people/show/:id" component={PersonDetail} />*/}
                         {/*<Route path="/people/create" component={PersonForm} />*/}
-                        {/*<Route path="/people/edit/:id" component={PersonForm} />*/}
+                        {/*<DepartmentDetail  />*/}
                     </Switch>
                 </div>
                 <Redirect from="/" to="/department"/>
