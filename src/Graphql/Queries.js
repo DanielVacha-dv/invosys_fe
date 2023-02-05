@@ -29,3 +29,14 @@ export const GET_DEPARTMENT_BY_ID = gql`
         }
     }
 `
+
+export const GET_SUB_DEPARTMENT = gql`
+    query getSubDepartment {
+        getSubDepartment {
+            departmentId,
+            subDepartmentId,
+            subDepartmentName,
+            subDepartmentComment
+        }
+    }
+`

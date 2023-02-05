@@ -1,44 +1,30 @@
 import React, {useEffect, useState} from "react";
-import {useQuery, gql} from "@apollo/client";
-import {GET_DEPARTMENT_BY_ID} from "../../Graphql/Queries";
 import {
     Link,
     useParams,
     useLocation
 } from "react-router-dom";
-import Select from 'react-select'
-
+import Select from "react-select";
+// make UI to interract with departments and its patrs , subdepartments etc.
 const DepartmentDetail = (props) => {
 
     const [departmentName, setDepartmentName] = useState(useLocation().state.departmentName);
     const [departmentComment, setDepartmentComment] = useState(useLocation().state.departmentComment);
-    const [departmenId, setDepartmenId] = useState(0);
-    // const {error, loading, data} = useQuery(GET_DEPARTMENT_BY_ID, {
-    //     variables: {id: props.match.params.id},
-    // });
+    const [departmenId, setDepartmenId] = useState(useLocation().state.departmentId);
+    const [subDepartments, setSubDepartments] = useState(useLocation().state.subDepartments);
 
-    const options = [
-        {value: 'chocolate', label: 'Chocolate'},
-        {value: 'strawberry', label: 'Strawberry'},
-        {value: 'vanilla', label: 'Vanilla'}
-    ]
-
-    // useEffect(() => {
-    //     if (data) {
-    //         setDepartmentName(data.getDepartmentById.name);
-    //         setDepartmentComment(data.getDepartmentById.comment);
-    //         setDepartmenId(data.getDepartmentById.departmenId);
-    //         console.log("set data ==" + data)
-    //     }
-    // }, [data]);
-
-    // const getDepartmentByIDJS = () => {
-    //     console.log("getDepartmentByIDJS ==")
-    //     if (error) {
-    //         console.log(" Error catch " + error)
-    //     }
-    // };
-    // let a = getDepartmentByIDJS();
+    let localSelectedValue = [];
+    let localOptions = [];
+    for (var j = 0; j < subDepartments.length; j++) {
+        let el = subDepartments[j];
+        localOptions.push({value: el.subDepartmentId, label: el.subDepartmentName});
+        if (el.departmentId.toString() === departmenId) {
+            localSelectedValue.push({value: el.subDepartmentId, label: el.subDepartmentName});
+        }
+    }
+    const [options, setOptions] = useState(localOptions);
+    const [selectedValue, setSelectedValue] = useState(localSelectedValue);
+    
     return (
         <div>
             <h1>Department detail</h1>
@@ -52,9 +38,12 @@ const DepartmentDetail = (props) => {
                 setDepartmentComment(e.target.value);
             }}/>
             <Select
-                closeMenuOnSelect={false}
                 isMulti
+                className="Select"
+                isClearable={true}
+                onChange={(item) => setSelectedValue(item)}
                 options={options}
+                value={selectedValue}
             />
         </div>
     );
