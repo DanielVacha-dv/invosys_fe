@@ -1,4 +1,5 @@
 import React, {useEffect, useState} from "react";
+// import IDepartmentDetail from './IDepartmentDetail'
 import {
     Link,
     useParams,
@@ -7,10 +8,14 @@ import {
 import Select from "react-select";
 // make UI to interract with departments and its patrs , subdepartments etc.
 const DepartmentDetail = (props) => {
-
+    // const departmentData =  useLocation().departmentData as IDepartmentDetail;
     const [departmentName, setDepartmentName] = useState(useLocation().state.departmentName);
+    // const [departmentName, setDepartmentName] = useState(departmentData.departmentName);
     const [departmentComment, setDepartmentComment] = useState(useLocation().state.departmentComment);
+    // const [departmentComment, setDepartmentComment] = useState(props.departmentData.departmentComment);
+    // const [departmenId, setDepartmenId] = useState(useLocation().state.departmentId);
     const [departmenId, setDepartmenId] = useState(useLocation().state.departmentId);
+    // const [departmenId, setDepartmenId] = useState(props.departmentData.departmentId);
     const [subDepartments, setSubDepartments] = useState(useLocation().state.subDepartments);
 
     let localSelectedValue = [];
@@ -24,7 +29,7 @@ const DepartmentDetail = (props) => {
     }
     const [options, setOptions] = useState(localOptions);
     const [selectedValue, setSelectedValue] = useState(localSelectedValue);
-    
+
     return (
         <div>
             <h1>Department detail</h1>

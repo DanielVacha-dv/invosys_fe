@@ -7,6 +7,8 @@ import {useQuery, gql} from "@apollo/client";
 import {GET_ALL_DEPARTMENTS} from "../../Graphql/Queries";
 import {GET_SUB_DEPARTMENT} from "../../Graphql/Queries";
 import {useMutation} from "@apollo/client";
+import {IDepartmentDetail} from './IDepartmentDetail';
+import {Title} from './../Footer';
 
 const DepartmentTable = () => {
     const {error, loading, data: dataDepartment} = useQuery(GET_ALL_DEPARTMENTS);
@@ -36,6 +38,15 @@ const DepartmentTable = () => {
             console.log(" Error catch " + errorg)
         }
     };
+    function  passDepartmentDetail(departmentNameP,departmentCommentP,departmentIdP,subDepartmentsP) {
+        let dd = IDepartmentDetail= {
+            departmentName: departmentNameP,
+            departmentComment: departmentCommentP ,
+            departmentId: departmentIdP,
+            subDepartments: subDepartmentsP
+        };
+        return  dd;
+    }
 
     return (
         <div>
@@ -67,12 +78,13 @@ const DepartmentTable = () => {
                                     <Link to={{
                                         pathname: "/department/show/" + val.departmentId,
                                         state: {
+                                            // departmentData: passDepartmentDetail(val.name,val.comment,val.departmentId,subDepartments)
                                             departmentName: val.name,
                                             departmentComment: val.comment,
                                             departmentId: val.departmentId,
                                             subDepartments: subDepartments
                                         }
-                                    }} className="btn btn-sm btn-info">
+                                     }} className="btn btn-sm btn-info">
                                         Zobrazit
                                     </Link>
                                 </div>
@@ -82,6 +94,7 @@ const DepartmentTable = () => {
                 </tbody>
             </table>
             <DepartmentInput/>
+            <Title title={"frante"} subtitle={"subtilicek jojo"}> </Title>
         </div>
     );
 };
