@@ -7,8 +7,8 @@ import {useQuery, gql} from "@apollo/client";
 import {GET_ALL_DEPARTMENTS} from "../../Graphql/Queries";
 import {GET_SUB_DEPARTMENT} from "../../Graphql/Queries";
 import {useMutation} from "@apollo/client";
-import {IDepartmentDetail} from './IDepartmentDetail';
 import {Title} from './../Footer';
+import {IDepartment} from './IBasicInterface';
 
 const DepartmentTable = () => {
     const {error, loading, data: dataDepartment} = useQuery(GET_ALL_DEPARTMENTS);
@@ -38,15 +38,23 @@ const DepartmentTable = () => {
             console.log(" Error catch " + errorg)
         }
     };
-    function  passDepartmentDetail(departmentNameP,departmentCommentP,departmentIdP,subDepartmentsP) {
-        let dd = IDepartmentDetail= {
-            departmentName: departmentNameP,
-            departmentComment: departmentCommentP ,
-            departmentId: departmentIdP,
-            subDepartments: subDepartmentsP
-        };
-        return  dd;
-    }
+
+    // function passDepartmentDetail(departmentNameP, departmentCommentP, departmentIdP, subDepartmentsP): FC<IDepartment> {
+        // let dd = IDepartmentDetail= {
+        //     departmentName: departmentNameP,
+        //     departmentComment: departmentCommentP ,
+        //     departmentId: departmentIdP,
+        //     subDepartments: subDepartmentsP
+        // };
+        // let departmentDetail: IDepartment = {
+        //     departmentName: departmentNameP,
+        //     departmentComment: departmentCommentP,
+        //     departmentId: departmentIdP,
+        //     subDepartment: subDepartmentsP
+        // }
+        // IDepartment;
+        // return departmentDetail;
+    // }
 
     return (
         <div>
@@ -79,12 +87,12 @@ const DepartmentTable = () => {
                                         pathname: "/department/show/" + val.departmentId,
                                         state: {
                                             // departmentData: passDepartmentDetail(val.name,val.comment,val.departmentId,subDepartments)
-                                            departmentName: val.name,
-                                            departmentComment: val.comment,
-                                            departmentId: val.departmentId,
-                                            subDepartments: subDepartments
+                                            // departmentName: val.name,
+                                            // departmentComment: val.comment,
+                                            // departmentId: val.departmentId,
+                                            // subDepartments: subDepartments
                                         }
-                                     }} className="btn btn-sm btn-info">
+                                    }} className="btn btn-sm btn-info">
                                         Zobrazit
                                     </Link>
                                 </div>
