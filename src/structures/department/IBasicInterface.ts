@@ -10,7 +10,7 @@ export default interface IDepartment {
     }[];
 }
  // export  IDepartment;
- interface ISubDepartment {
+export default interface ISubDepartment {
     subDepartmentName: string;
     subDepartmentComment: string;
     subDepartmentId: number;

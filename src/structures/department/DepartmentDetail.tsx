@@ -12,7 +12,7 @@ const DepartmentDetail: FC<IDepartment> = ({ departmentName, departmentComment,d
 
     const [departmentNameLoc, setdepartmentNameLoc] = useState(departmentName);
     const [departmentCommentLoc, setdepartmentCommentLoc] = useState(departmentComment);
-    const [departmenId, setDepartmenId] = useState(departmentId);
+    const [departmenIdLoc, setDepartmenId] = useState(departmentId);
     const [subDepartments, setSubDepartments] = useState(subDepartment);
 
     let localSelectedValue = [];
@@ -20,7 +20,7 @@ const DepartmentDetail: FC<IDepartment> = ({ departmentName, departmentComment,d
     for (var j = 0; j < subDepartments.length; j++) {
         let el = subDepartments[j];
         localOptions.push({value: el.subDepartmentId, label: el.subDepartmentName});
-        if (el.departmentId == departmenId) {
+        if (el.departmentId == departmenIdLoc) {
             localSelectedValue.push({value: el.subDepartmentId, label: el.subDepartmentName});
         }
     }
