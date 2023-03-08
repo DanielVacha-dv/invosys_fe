@@ -1,36 +1,44 @@
 import React, {useEffect, useState} from "react";
 import {FC} from 'react';
 import IDepartment  from './IBasicInterface';
-import Link from "react-router-dom";
-import useParams from "react-router-dom";
-import useLocation from "react-router-dom";
+import {
+    Link,
+    useParams,
+    useLocation
+} from "react-router-dom";
 import Select from "react-select";
+import {initDepartmentFromProp} from "./IBasicInterface";
 
 
 // make UI to interract with departments and its patrs , subdepartments etc.
-const DepartmentDetail: FC<IDepartment> = ({ departmentName, departmentComment,departmentId,subDepartment })  => {
+// const DepartmentDetail: FC<IDepartment> = ({ departmentName, departmentComment,departmentId,subDepartment })  => {
+const DepartmentDetail: FC<IDepartment> = (props)  => {
+    // @ts-ignore
+    const myObj: IDepartment =  initDepartmentFromProp(useLocation().state.departmentData);
+    // const myObj: FC<IDepartment> = useLocation().state.departmentData;
+    // const myObj: IDepartment = {  useLocation().state.departmentData};
 
-    const [departmentNameLoc, setdepartmentNameLoc] = useState(departmentName);
-    const [departmentCommentLoc, setdepartmentCommentLoc] = useState(departmentComment);
-    const [departmenIdLoc, setDepartmenId] = useState(departmentId);
-    const [subDepartments, setSubDepartments] = useState(subDepartment);
+    // const myState: locationStateProps = location.state as locationStateProps;
+    const [departmentNameLoc, setdepartmentNameLoc] = useState(myObj.departmentName);
+    const [departmentCommentLoc, setdepartmentCommentLoc] = useState(myObj.departmentComment);
+    // const [departmenIdLoc, setDepartmenId] = useState(departmentId);
+    // const [subDepartments, setSubDepartments] = useState(subDepartment);
 
     let localSelectedValue = [];
     let localOptions = [];
-    for (var j = 0; j < subDepartments.length; j++) {
-        let el = subDepartments[j];
-        localOptions.push({value: el.subDepartmentId, label: el.subDepartmentName});
-        if (el.departmentId == departmenIdLoc) {
-            localSelectedValue.push({value: el.subDepartmentId, label: el.subDepartmentName});
-        }
-    }
-    const [options, setOptions] = useState(localOptions);
-    const [selectedValue, setSelectedValue] = useState(localSelectedValue);
+    // for (var j = 0; j < subDepartments.length; j++) {
+    //     let el = subDepartments[j];
+    //     localOptions.push({value: el.subDepartmentId, label: el.subDepartmentName});
+    //     if (el.departmentId == departmenIdLoc) {
+    //         localSelectedValue.push({value: el.subDepartmentId, label: el.subDepartmentName});
+    //     }
+    // }
+    // const [options, setOptions] = useState(localOptions);
+    // const [selectedValue, setSelectedValue] = useState(localSelectedValue);
 
     return (
         <div>
-            <h1>Department detail</h1>
-            <hr/>
+            <h1>Department detail {myObj.subDepartment[0].subDepartmentName}</h1>
             <input
                 type="text" placeholder=" department name " value={departmentNameLoc} onChange={(e) => {
                 setdepartmentNameLoc(e.target.value);
@@ -44,8 +52,8 @@ const DepartmentDetail: FC<IDepartment> = ({ departmentName, departmentComment,d
                 className="Select"
                 isClearable={true}
                 // onChange={(item) => setSelectedValue(item)}
-                options={options}
-                value={selectedValue}
+                // options={options}
+                // value={selectedValue}
             />
         </div>
     );
